@@ -18,14 +18,15 @@ namespace saintelague
 
         public void CalculateSeats()
         {
+            int totalVotes = this.parties.Sum(xx => xx.GetVotes());
             while (this.seatsRemaining > 0)
             {
-                parties.OrderByDescending(pp => pp.quot()).First().AddSeat();
+                parties.Where(xx => xx.Threshold(totalVotes)).OrderByDescending(pp => pp.quot()).First().AddSeat();
                 this.seatsRemaining--;
             }
         }
 
-        public int SeatsCalculated(int PartyNumber)
+        public int GetSeatsCalculated(int PartyNumber)
         {
             Party p = parties.Find(xx => xx.GetPartyNumber() == PartyNumber);
             return p.GetSeats();
@@ -75,6 +76,19 @@ namespace saintelague
             }
         }
 
+        public bool Threshold(int TotalVotes)
+        {
+            if (this.electriteSeats > 0 || this.votes * 20 > TotalVotes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int GetPartyNumber() { return this.partyNumber; }
+        public int GetVotes() { return this.votes; }
     }
 }
