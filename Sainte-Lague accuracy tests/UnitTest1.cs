@@ -20,6 +20,7 @@ namespace Sainte_Lague_accuracy_tests
             er.AddParty(new Party(24168, 6, 1));
             er.AddParty(new Party(23889, 7, 1));
             er.AddParty(new Party(13443, 8, 1));
+            er.AddParty(new Party(59237, 9, 0));
             er.CalculateSeats();
             Assert.IsTrue(er.GetSeatsCalculated(1) == 59, "Hasn't worked for National");
             Assert.IsTrue(er.GetSeatsCalculated(2) == 34, "Hasn't worked for Labour");
@@ -29,6 +30,7 @@ namespace Sainte_Lague_accuracy_tests
             Assert.IsTrue(er.GetSeatsCalculated(6) == 1);
             Assert.IsTrue(er.GetSeatsCalculated(7) == 1);
             Assert.IsTrue(er.GetSeatsCalculated(8) == 1);
+            Assert.IsTrue(er.GetSeatsCalculated(9) == 0, "Conservative party shouldn't get any seats");
         }
 
         [TestMethod]
